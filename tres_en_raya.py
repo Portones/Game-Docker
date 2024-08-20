@@ -82,7 +82,7 @@ def TresEnRayaPage(page: ft.Page, params: Params, basket: Basket):
 
 
     texto_widget = ft.Text("Turno de Cruz", size=20, weight=ft.FontWeight.BOLD)
-    home_button = ft.FloatingActionButton(icon=ft.icons.HOME, on_click=lambda e: page.go("/"))
+    home_button = ft.FloatingActionButton(icon=ft.icons.HOME, on_click=lambda e: page.go("/home"))
     boton1 = ft.FloatingActionButton(icon=ft.icons.NORTH, width=100, height=100, on_click=change_button, data="1")
     boton2 = ft.FloatingActionButton(icon=ft.icons.NORTH, width=100, height=100, on_click=change_button, data="2")
     boton3 = ft.FloatingActionButton(icon=ft.icons.NORTH, width=100, height=100, on_click=change_button, data="3")

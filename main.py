@@ -5,7 +5,7 @@ from flet_route import Routing, path
 from number_game import NumberGamePage
 from tres_en_raya import TresEnRayaPage
 from home_page import HomePage
-from user_page import UserPage
+#from user_page import UserPage
 
 def setup_page(page: ft.Page):
     page.horizontal_alignment = "center"
@@ -18,7 +18,7 @@ def main(page: ft.Page):
     setup_page(page)
     
     app_routes = [
-        path(url="/", view=UserPage, clear=True),
+        #path(url="/", view=UserPage, clear=True),
         path(url="/home", view=HomePage, clear=True),
         path(url="/tres_en_raya", view=TresEnRayaPage, clear=True),
         path(url="/number_game", view=NumberGamePage, clear=True),

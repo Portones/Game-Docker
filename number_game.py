@@ -62,7 +62,7 @@ def NumberGamePage(page: ft.Page, params: Params, basket: Basket):
         clicked_button.update()
     
     texto_widget = ft.Text("Number Game", size = 20, weight=ft.FontWeight.BOLD)
-    home_button = ft.FloatingActionButton(icon=ft.icons.HOME, on_click=lambda e: page.go("/"))
+    home_button = ft.FloatingActionButton(icon=ft.icons.HOME, on_click=lambda e: page.go("/home"))
 
     dialog = ft.AlertDialog(title=ft.Text(f"¡Has ganado!😀"), on_dismiss=lambda e: reset_game())
 
