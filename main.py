@@ -35,5 +35,5 @@ if __name__ == "__main__":
     ft.app(
         target=main,
         view=ft.AppView.WEB_BROWSER,
-        port=1050
+        port=8500
     )
