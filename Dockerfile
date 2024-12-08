@@ -8,6 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 8002
+EXPOSE 8502
 
-CMD ["flet", "run", "--web", "--port", "8002"]
+CMD ["flet", "run", "--web", "--port", "8502"]
