@@ -9,6 +9,7 @@ def NumberGamePage(page: ft.Page, params: Params, basket: Basket):
     counter = 0
     max_tries = 6
 
+
     def reset_game():
         nonlocal counter
 
@@ -21,7 +22,10 @@ def NumberGamePage(page: ft.Page, params: Params, basket: Basket):
 
         for button in button_sol_list:
             button.data = randint(min_number, max_number)
+            button.icon = ft.icons.QUESTION_MARK
+            button.bgcolor = None
             button.update()
+
 
     def check_win():
         nonlocal counter
@@ -35,6 +39,9 @@ def NumberGamePage(page: ft.Page, params: Params, basket: Basket):
                 dialog.title=ft.Text(f"¡Has perdido!😢")
                 page.open(dialog)
         counter += 1
+        try_button.text = str(counter)
+        try_button.update()
+
 
     def check_restults(e):
 
@@ -43,14 +50,21 @@ def NumberGamePage(page: ft.Page, params: Params, basket: Basket):
             player_number = button_play.data
             if player_number == button_sol_list[index].data:
                 button_play.bgcolor = ft.colors.GREEN
+                button_sol_list[index].bgcolor = ft.colors.GREEN 
+                button_sol_list[index].icon = None
             elif player_number in solution_values:
                 button_play.bgcolor = ft.colors.ORANGE
+                button_sol_list[index].bgcolor = ft.colors.ORANGE
             else:
                 button_play.bgcolor = ft.colors.RED
+                button_sol_list[index].bgcolor = ft.colors.RED
+            button_sol_list[index].text = button_play.text
             button_play.update()
+            button_sol_list[index].update()
             
         check_win()
         
+
     def change_button_number(e):
         clicked_button = e.control
         if clicked_button.data < max_number:
@@ -79,21 +93,43 @@ def NumberGamePage(page: ft.Page, params: Params, basket: Basket):
     button_play_list = [button_play_1, button_play_2, button_play_3, button_play_4]
     button_sol_list = [button_sol_1, button_sol_2, button_sol_3, button_sol_4]
 
+    try_button = ft.FloatingActionButton(text=counter, data=counter, disabled=True)
+
     for button in button_sol_list:
         button.data = randint(min_number, max_number)
         
     play_button = ft.FloatingActionButton(text="Play", on_click=check_restults, width=80)
 
     central_widget = ft.Container(
-        ft.Column(
+        ft.Row(
             controls=[
-                ft.Row([texto_widget, home_button], spacing=20, vertical_alignment="center", alignment="center"),
-                ft.Row([button_sol_1, button_sol_2, button_sol_3, button_sol_4], vertical_alignment="center", alignment="center"),
-                ft.Row([button_play_1, button_play_2, button_play_3, button_play_4], vertical_alignment="center", alignment="center"),
-                play_button
-            ],
-            horizontal_alignment="center",
-            alignment="center"
+                ft.Column(
+                    controls=[
+                        ft.Row([texto_widget, home_button], spacing=20, vertical_alignment="center", alignment="center"),
+                        ft.Row([button_sol_1, button_sol_2, button_sol_3, button_sol_4], vertical_alignment="center", alignment="center"),
+                        ft.Row([button_play_1, button_play_2, button_play_3, button_play_4], vertical_alignment="center", alignment="center"),
+                        play_button
+                    ],
+                    horizontal_alignment="center",
+                    alignment="center"
+                ),
+                ft.Row(
+                    controls=[
+                        ft.Column(
+                            controls=[
+                                ft.Text("Max Tries"),
+                                ft.FloatingActionButton(text=max_tries, data=max_tries, disabled=True)
+                            ], horizontal_alignment="center", alignment="center"
+                        ),
+                        ft.Column(
+                            controls=[
+                                ft.Text("Try"),
+                                try_button
+                            ], horizontal_alignment="center", alignment="center"
+                        )
+                    ]
+                )
+            ], vertical_alignment="center", alignment="center", spacing=30
         )
     )
 
